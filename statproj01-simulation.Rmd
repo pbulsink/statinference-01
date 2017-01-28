@@ -1,0 +1,11 @@
+---
+title: 'Statistical Inference Course Project: Simulation Exploration of the Exponential Distribution'
+author: "Philip Bulsink"
+date: '2017-01-28'
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
