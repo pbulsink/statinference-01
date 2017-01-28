@@ -7,6 +7,7 @@ output: pdf_document
 
 ```{r setup, include=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
 options(digits = 3)
 ```
 
@@ -19,7 +20,6 @@ There are a range of statistical distributions that serve unique purposes in sta
 To invesigate this distribution, simulations of samples from the population of the exponential distribution will be analyzed. A sample from the population can be drawn with the `R` command `rexp(n, lambda)`, where `n` is the number of samples to draw, and `lambda` provides both the mean and the standard deviation (both equal to `1/lambda`). Lambda is also known as `rate`, according to the coding standard. For this study, we will use a lambda value of 0.2, providing us with a mean of `1/0.2 = 5`, and a standard deviation of `1/0.2 = 5` Thus, when we sample we draw from a population with this approximate density:
 
 ```{r rexp_density, message=FALSE, fig.height=3.5}
-library(ggplot2)
 ggplot(data = data.frame(x = rexp(100000, 0.2)), aes(x = x)) + 
     geom_density(fill = 'blue') +
     ggtitle("Density of rexp() with lambda=0.2") + 
