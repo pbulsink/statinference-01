@@ -13,7 +13,7 @@ options(digits = 3)
 ```
 
 #Introduction
-This report will investigate the `R` dataset `ToothGrowth`. The data will be summarised and relationships between tooth length and supplement or dosage will be tested using confidence intervals and hypothesis tests, as described in the Coursera Data Science course on Statistical Inference.
+This report will investigate the `R` dataset `ToothGrowth`. The data will be summarized and relationships between tooth length and supplement or dosage will be tested using confidence intervals and hypothesis tests, as described in the Coursera Data Science course on Statistical Inference.
 
 #Data Exploration
 The `ToothGrowth` dataset contains three columns of data. The column named `len` lists tooth length, the column `supp` describes the supplement type (either VC or OJ), and the column `dose` gives the dosage of the supplement in milligrams per day. 
@@ -25,7 +25,7 @@ summary(ToothGrowth)
 
 We can see that there are two supplements, each given at a range of 0.5 to 2 mg/day, resulting in a range of tooth lengths. 
 
-We'll plot the data with boxplots, showing the relationship between dose and toothlength, broken up by supplement type. 
+We'll plot the data with box plots, showing the relationship between dose and toothlength, broken up by supplement type. 
 ```{r supp_boxplot, warnings=FALSE, message=FALSE, fig.height=4}
 ggplot(ToothGrowth, aes(as.factor(dose), len, fill = supp)) + 
     geom_boxplot() + 
@@ -63,7 +63,7 @@ kable(matrix(c(tt1, tt2, tt3), ncol=2,
                              c("Low CI", "High CI"))))
 ```
 
-Thus, we can see that at no time does the confidence interval include 0, each increase in dosing increases tooth lengh, with statistically significant confidence.
+Thus, we can see that at no time does the confidence interval include 0, each increase in dosing increases tooth length, with statistically significant confidence.
 
 ##Permutation Testing of Supplement
 One way of testing to see if two groups are statistically different is to test the permutation of their results. That is, to randomly assign group labels to each values, and test for confidence. We'll test each supplement group at each dosing amount, to see if one supplement is better than another when given at a certain dose. 
@@ -83,7 +83,7 @@ perm3<-sapply(1:10000, function(i) testStat(len3, sample(group)))
 ```
 
 
-We compare these permutted results with the original difference in the means by looking at how often the permutted groups give a larger mean difference than the original group. This gives us an estimate of our p value for rejecting the null hypothesis, that is, how confident we are to say that the difference in supplements is statistically significant. 
+We compare these permuted results with the original difference in the means by looking at how often the permuted groups give a larger mean difference than the original group. This gives us an estimate of our p value for rejecting the null hypothesis, that is, how confident we are to say that the difference in supplements is statistically significant. 
 
 ```{r}
 mean(perm1>observed1)
@@ -91,7 +91,7 @@ mean(perm1>observed1)
 
 This provides us with the confidence interval to say that the mean of the `OJ` supplement is higher than that of the `VC` supplement, when given 0.5 mg/day dose. The difference of those means is `r observed1`.
 
-Similarly, we find that we have a p value of `r mean(perm2>observed2)` for our 1 mg/day dosage (with an average tooth length difference of `r observed2`), and a p value of `r mean(perm3>observed3)` for 2 mg/day dosage (with an average difference of `r observed3`).
+Similarly, we find that we have a p value of `r format(mean(perm2>observed2), scientific=FALSE)` for our 1 mg/day dosage (with an average tooth length difference of `r observed2`), and a p value of `r mean(perm3>observed3)` for 2 mg/day dosage (with an average difference of `r observed3`).
 
 #Summary
 We have identified the statistical differences between supplements and dosages in the `R` dataset `ToothGrowth`. Each dosage level is statistically different from the others. The differences between supplements is statistically significant for dosage levels of 0.5 and 1 mg/day, but not for 2 mg/day. 
